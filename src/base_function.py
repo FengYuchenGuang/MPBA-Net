@@ -74,7 +74,7 @@ def train(epoch,
           model,
           train_loader,
           parse_config,
-          Choose_Point_loss,
+          hybrid_loss,
           optimizer,
           writer,
           logging_loss):
@@ -116,7 +116,7 @@ def train(epoch,
 
             point_loss = 0.
             for i in range(len(point_maps_pre)):
-                point_loss += Choose_Point_loss(point_maps_pre[i], point_c4)
+                point_loss += hybrid_loss(point_maps_pre[i], point_c4)
             point_loss = point_loss / len(point_maps_pre)
 
             loss = loss_dc + point_loss  # point_loss weight: 3
@@ -158,7 +158,7 @@ def evaluation(epoch,
                loader,
                model,
                parse_config,
-               Choose_Point_loss,
+               hybrid_loss,
                writer,
                logging_evaluation):
     model.eval()
@@ -188,22 +188,22 @@ def evaluation(epoch,
                 output, point_maps_pre_1, point_maps_pre_2 = model(data)
                 point_loss_c4 = 0.
                 for i in range(len(point_maps_pre_1) - 1):
-                    point_loss_c4 += Choose_Point_loss(point_maps_pre_1[i], point_c4)
+                    point_loss_c4 += hybrid_loss(point_maps_pre_1[i], point_c4)
                 point_loss_c4 = 1.0 / len(point_maps_pre_1) * (
-                    point_loss_c4 + Choose_Point_loss(point_maps_pre_1[-1], point_c4))
+                    point_loss_c4 + hybrid_loss(point_maps_pre_1[-1], point_c4))
                 point_loss_c5 = 0.
                 for i in range(len(point_maps_pre_2) - 1):
-                    point_loss_c5 += Choose_Point_loss(point_maps_pre_2[i], point_c5)
+                    point_loss_c5 += hybrid_loss(point_maps_pre_2[i], point_c5)
                 point_loss_c5 = 1.0 / len(point_maps_pre_2) * (
-                    point_loss_c5 + Choose_Point_loss(point_maps_pre_2[-1], point_c5))
+                    point_loss_c5 + hybrid_loss(point_maps_pre_2[-1], point_c5))
                 point_loss = 0.5 * (point_loss_c4 + point_loss_c5)
             elif parse_config.point_pred == 1:
                 output, point_maps_pre = model(data)
                 point_loss = 0.
                 for i in range(len(point_maps_pre) - 1):
-                    point_loss += Choose_Point_loss(point_maps_pre[i], point_c4)
+                    point_loss += hybrid_loss(point_maps_pre[i], point_c4)
                 point_loss = 1.0 / len(point_maps_pre) * (
-                    point_loss + Choose_Point_loss(point_maps_pre[-1], point_c4))
+                    point_loss + hybrid_loss(point_maps_pre[-1], point_c4))
 
             output = torch.sigmoid(output)
 

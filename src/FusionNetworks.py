@@ -70,7 +70,7 @@ class MPBA_Net(nn.Module):
                                         bias=True)
 
         self.head = StripPooling(2048, up_kwargs={'mode': 'bilinear', 'align_corners': True})
-        self.MP = MutilPooling(2048,self.num_classes,up_kwargs={'mode': 'bilinear', 'align_corners': True})
+        self.MPF = MutilPooling(2048,self.num_classes,up_kwargs={'mode': 'bilinear', 'align_corners': True})
 
     def forward(self, x):
         h = x.size()[2]
@@ -106,7 +106,7 @@ class MPBA_Net(nn.Module):
         trans_feature_maps = self.trans_out_conv(features_encoded.contiguous())  #.contiguous()
         trans_feature_maps = trans_feature_maps + feature_map
 
-        output = self.MP(trans_feature_maps) # (shape: (batch_size, num_classes, h/16, w/16))
+        output = self.MPF(trans_feature_maps) # (shape: (batch_size, num_classes, h/16, w/16))
         output = F.interpolate(output, size=(h, w),mode="bilinear")  # (shape: (batch_size, num_classes, h, w))
 
 

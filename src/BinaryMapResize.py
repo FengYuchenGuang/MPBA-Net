@@ -8,13 +8,13 @@ import matplotlib.pyplot as plt
 
 
 def process_isic_npy(
-        dim=(512, 512), save_dir='D:/study/Newdata/npyPic/isic2018/'):
+        dim=(512, 512), save_dir='../Newdata/npyPic/isic2018/'):
     process_name = ["Test", "Train", "Validation"]
 
     for mkdir in process_name:
         usesave_dir = save_dir
-        image_dir_path = 'D:/study/data/isic2018/isic2018/{}/Image'.format(mkdir)
-        mask_dir_path = 'D:/study/data/isic2018/isic2018/{}/Label'.format(mkdir)
+        image_dir_path = '../isic2018/{}/Image'.format(mkdir)
+        mask_dir_path = '../isic2018/{}/Label'.format(mkdir)
         usesave_dir = usesave_dir+mkdir+'/'
 
         image_path_list = os.listdir(image_dir_path)
@@ -57,14 +57,14 @@ def process_isic_npy(
 
 
 def process_isic2018(
-        dim=(512, 512), save_dir='D:/study/Newdata/re_isic2018/'):
+        dim=(512, 512), save_dir='../Newdata/re_isic2018/'):
     process_name = ["Test", "Train", "Validation"]
 
 
     for mkdir in process_name:
         usesave_dir = save_dir
-        image_dir_path = 'D:/study/data/isic2018/isic2018/{}/Image'.format(mkdir)
-        mask_dir_path = 'D:/study/data/isic2018/isic2018/{}/Label'.format(mkdir)
+        image_dir_path = '../isic2018/{}/Image'.format(mkdir)
+        mask_dir_path = '../isic2018/{}/Label'.format(mkdir)
         usesave_dir = usesave_dir + mkdir + '/'
 
         image_path_list = os.listdir(image_dir_path)

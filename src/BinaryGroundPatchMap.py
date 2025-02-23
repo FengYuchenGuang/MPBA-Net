@@ -138,10 +138,8 @@ def point_gen_isic():
     R = 10
     N = 25
     for split in ['Train', 'Test', 'Validation']:
-        # data_dir = '../dataset/resizePic/re_isic2017/{}/Label'.format(split)
-        # save1_dir = '../dataset/npyPic/isic2017/{}/Label'.format(split)
-        data_dir = 'D:/study/Newdata/re_isic2018/{}/Label'.format(split)
-        save1_dir = 'D:/study/Newdata/npyPic/isic2018/{}/Label'.format(split)
+        data_dir = '../Newdata/re_isic2018/{}/Label'.format(split)
+        save1_dir = '../Newdata/npyPic/isic2018/{}/Label'.format(split)
 
         save_dir = save1_dir.replace('Label', 'Point')
         os.makedirs(save_dir, exist_ok=True)

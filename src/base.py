@@ -1,9 +1,7 @@
-# camera-ready
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-# sys.path.insert(0, '../')
 
 from src.resnet import ResNet18_OS16, ResNet50_OS16
 from src.ASPP import ASPP, ASPP_Bottleneck

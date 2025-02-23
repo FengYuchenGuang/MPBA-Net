@@ -63,16 +63,13 @@ elif parse_config.dataset == 'isic2017':
 
 
 
-###############################################
-#在linux系统中可以使用多个子进程加载数据，而在windows系统中不能。
-#所以在windows中要将DataLoader中的num_workers设置为0或者采用默认为0的设置
 ###########################################
 #----------Load Train & val data----------#
 ###########################################
 train_loader = torch.utils.data.DataLoader(dataset,
                                            batch_size=parse_config.bt_size,
                                            shuffle=False,
-                                           num_workers=1,
+                                           num_workers=2,
                                            pin_memory=True,
                                            drop_last=True)
 val_loader = torch.utils.data.DataLoader(dataset2,
@@ -120,7 +117,7 @@ logging_evaluation = get_logger('evaluation', txt_path_evaluation)
 #################################
 #----------Choose Point_loss----------#
 #################################
-Choose_Point_loss = [focal_loss, ce_loss][parse_config.seg_loss]
+hybrid_loss = [focal_loss, ce_loss][parse_config.seg_loss]
 
 
 
@@ -140,7 +137,7 @@ def main():
               model,
               train_loader,
               parse_config,
-              Choose_Point_loss,
+              hybrid_loss,
               optimizer,
               writer,
               logging_loss)
@@ -148,7 +145,7 @@ def main():
                                      val_loader,
                                      model,
                                      parse_config,
-                                     Choose_Point_loss,
+                                     hybrid_loss,
                                      writer,
                                      logging_evaluation)
         # scheduler.step(loss)

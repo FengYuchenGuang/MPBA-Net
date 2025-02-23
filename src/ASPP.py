@@ -1,14 +1,8 @@
-# camera-ready
 
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-
-# Atrous密集预测，多尺度特征提取
-#ASPP（Atrous Spatial Pyramid Pooling），空洞空间卷积池化金字塔。
-#SPP 本质上由一个1×1的卷积（最左侧绿色） + 池化金字塔（中间三个蓝色） +ASPP Pooling（最右侧三层）组成。
-# 而池化金字塔各层的膨胀因子可自定义，从而实现自由的多尺度特征提取。
 
 class ASPP(nn.Module):
     def __init__(self, num_classes, head = True):
