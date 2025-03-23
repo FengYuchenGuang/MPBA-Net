@@ -9,7 +9,7 @@ def setting_train_config():
     parser.add_argument('--fold', type=str, default='0')
     parser.add_argument('--lr_seg', type=float, default=1e-4)  # 0.0003
     parser.add_argument('--n_epochs', type=int, default=200)  # 100
-    parser.add_argument('--bt_size', type=int, default=16)  # 8
+    parser.add_argument('--bt_size', type=int, default=32)  # 8
     parser.add_argument('--seg_loss', type=int, default=0, choices=[0, 1])
     parser.add_argument('--aug', type=int, default=1)
     parser.add_argument('--patience', type=int, default=500)  # 50

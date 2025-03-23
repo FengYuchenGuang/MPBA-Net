@@ -48,7 +48,6 @@ class myDataset(data.Dataset):
         self.point_paths.sort()
 
         print('Loaded {} frames'.format(len(self.image_paths)))
-        #self.num_samples = len(self.image_paths) #全部训练
         self.num_samples = len(self.image_paths)
         self.aug = aug
 
@@ -72,7 +71,7 @@ class myDataset(data.Dataset):
                 point_data[..., np.newaxis]], axis=-1)
 
 
-            #             print(mask.shape)
+
             tsf = self.transf(image=image_data.astype('uint8'), mask=mask)
             image_data, mask_aug = tsf['image'], tsf['mask']
             label_data = mask_aug[:, :, 0]
