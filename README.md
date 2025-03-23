@@ -32,8 +32,8 @@ Please download the dataset from [ISIC](https://www.isic-archive.com/) challenge
 Please run:
 
 ```bash
-$ python src/process_resize.py
-$ python src/process_point.py
+$ python src/BinaryMapResize.py
+$ python src/BinaryGroundPatchMap.py
 ```
 
 You need to change the **File Path** to your own.
@@ -45,17 +45,17 @@ You need to change the **File Path** to your own.
 ### Testing
 
 ```bash
-$ python test.py --dataset isic2016
+$ python test.py --dataset isic2018
 ```
 
 ### Result
 
 |Method | Dice | IoU | Precision | SP | SE |
 | :----- | :----: | :----: |:----: |:----: | :----: |
-|U-Net | 0.8338 | 0.7486 | 0.9060 | 0.9420 | 0.8330 |
-|DeepLabv3+| 0.8610 | 0.7809 | 0.9124 | 0.9438 | 0.8593 |
-|SkinFormer| 0.9231 | 0.8551 | **0.9625** | 0.9688 | 0.9008 |
-|MPBA-Net| **0.9303** | ***0.8596** | 0.9396 | **0.9692** | **0.9057** |
+|U-Net | 0.8232 | 0.7274 | 0.9268 | 0.9546 | 0.7868 |
+|DeepLabv3+| 0.8494 | 0.7612 | 0.9245 | 0.9544 | 0.8266 |
+|SkinFormer| 0.8868 | 0.8184 | **0.9483** | 0.9562 | 0.8890 |
+|MPBA-Net| **0.8893** | **0.8205** | 0.9260 | **0.9576** | **0.9026** |
 
 
 
