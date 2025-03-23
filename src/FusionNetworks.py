@@ -106,7 +106,7 @@ class MPBA_Net(nn.Module):
         trans_feature_maps = self.trans_out_conv(features_encoded.contiguous())  #.contiguous()
         trans_feature_maps = trans_feature_maps + feature_map
 
-        output = self.MPF(trans_feature_maps) # (shape: (batch_size, num_classes, h/16, w/16))
+        output = self.MPF(trans_feature_maps)
         output = F.interpolate(output, size=(h, w),mode="bilinear")  # (shape: (batch_size, num_classes, h, w))
 
 

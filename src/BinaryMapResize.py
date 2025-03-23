@@ -109,5 +109,5 @@ def process_isic2018(
 
 
 if __name__ == '__main__':
-    process_isic2018()
+    # process_isic2018()
     process_isic_npy()

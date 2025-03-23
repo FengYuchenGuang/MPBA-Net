@@ -27,9 +27,6 @@ class DeepLabV3(nn.Module):
         w = x.size()[3]
         feature_map = self.resnet(x)
 
-        # (shape: (batch_size, 512, h/16, w/16)) (assuming self.resnet is ResNet18_OS16 or ResNet34_OS16.
-        # If self.resnet is ResNet18_OS8 or ResNet34_OS8, it will be (batch_size, 512, h/8, w/8).
-        # If self.resnet is ResNet50-152, it will be (batch_size, 4*512, h/16, w/16))
         output = self.aspp(
             feature_map)  # (shape: (batch_size, num_classes, h/16, w/16))
         output = F.upsample(

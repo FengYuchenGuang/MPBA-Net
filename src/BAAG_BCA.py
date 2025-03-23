@@ -122,15 +122,7 @@ class BoundaryCrossAttention(CrossAttention):
                  dim_feedforward=512,
                  dropout=0.0):
         super().__init__(d_model, nhead, dim_feedforward, dropout)
-        
-        #self.BAG = nn.Sequential(
-        #    nn.Conv2d(d_model, d_model, kernel_size=3, padding=1, bias=False),
-        #    nn.BatchNorm2d(d_model),
-        #    nn.ReLU(inplace=False),
-        #    nn.Conv2d(d_model, d_model, kernel_size=3, padding=1, bias=False),
-        #    nn.BatchNorm2d(d_model),
-        #    nn.ReLU(inplace=False),
-        #    nn.Conv2d(d_model, 1, kernel_size=1))
+
         self.BAG_type = BAG_type
         if self.BAG_type == '1D':
             if Atrous:

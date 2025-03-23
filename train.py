@@ -4,14 +4,14 @@ import torch.utils.data
 from configs.config_setting import setting_train_config
 from torch.utils.tensorboard import SummaryWriter
 from src.base_function import get_logger,ce_loss,focal_loss,train,evaluation
-from torch.optim.lr_scheduler import  CosineAnnealingLR
+from torch.optim.lr_scheduler import CosineAnnealingLR
 import time
+
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, root_dir)
 
 parse_config = setting_train_config()
-# print("parse_config:",parse_config)
 
 EPOCHS = parse_config.n_epochs
 
@@ -50,17 +50,6 @@ if parse_config.dataset == 'isic2018':
     from dataset.isic2018 import myDataset
     dataset = myDataset(split='train', aug=parse_config.aug)
     dataset2 = myDataset(split='valid', aug=False)
-
-elif parse_config.dataset == 'isic2016':
-    from dataset.isic2016 import myDataset
-    dataset = myDataset(split='train', aug=parse_config.aug)
-    dataset2 = myDataset(split='valid', aug=False)
-
-elif parse_config.dataset == 'isic2017':
-    from dataset.isic2017 import myDataset
-    dataset = myDataset(split='train', aug=parse_config.aug)
-    dataset2 = myDataset(split='valid', aug=False)
-
 
 
 ###########################################

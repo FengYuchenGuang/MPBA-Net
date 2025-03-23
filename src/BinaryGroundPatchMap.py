@@ -47,9 +47,8 @@ def draw_msra_gaussian(heatmap, center, sigma):
 
 
 def kpm_gen(label_path, R, N):
-    #label = np.load(label_path)
-    label = cv2.imread(label_path,0)
-    #     label = label[0]
+    label = np.load(label_path)
+    label = label[0]
     label_ori = label.copy()
     label = label[::4, ::4]
     label = np.uint8(label * 255)
@@ -57,10 +56,6 @@ def kpm_gen(label_path, R, N):
                                            cv2.CHAIN_APPROX_NONE)
     contour_len = len(contours)
 
-    label = np.repeat(label[..., np.newaxis], 3, axis=-1)
-    draw_label = cv2.drawContours(label.copy(), contours, -1, (0, 0, 255), 1)
-
-    point_file = []
     if contour_len == 0:
         point_heatmap = np.zeros((512, 512))
     else:
@@ -114,13 +109,11 @@ def kpm_gen(label_path, R, N):
                 if stds[i] < np.min(
                         stds[neighbor_points_index]) or stds[i] > np.max(
                             stds[neighbor_points_index]):
-                    #                     print(points[i])
                     point_heatmap = draw_msra_gaussian(
                         point_heatmap, (points[i, 0], points[i, 1]), 5)
                     selected_points.append(points[i])
 
-            print("selected_points num: ", len(selected_points))
-            #             print(selected_points)
+
             maskk = np.zeros((512, 512))
             rr, cc = skimage.draw.polygon(
                 np.array(selected_points)[:, 1],
@@ -133,10 +126,9 @@ def kpm_gen(label_path, R, N):
     return label_ori, point_heatmap
 
 
-
 def point_gen_isic():
-    R = 10
-    N = 25
+    R = 15
+    N = 20
     for split in ['Train', 'Test', 'Validation']:
         data_dir = '../Newdata/re_isic2018/{}/Label'.format(split)
         save1_dir = '../Newdata/npyPic/isic2018/{}/Label'.format(split)
@@ -156,7 +148,7 @@ def point_gen_isic():
             point_heatmap = np.array(point_heatmap, dtype=np.uint8)
             np.save(save_path, point_heatmap)
             num += 1
-            # print("point_heatmap:  ", point_heatmap.shape)
+
 
 if __name__ == '__main__':
     point_gen_isic()

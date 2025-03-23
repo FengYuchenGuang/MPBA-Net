@@ -24,16 +24,6 @@ if parse_config.dataset == 'isic2018':
     from dataset.isic2018 import myDataset
     dataset = myDataset('test', aug=False)
 
-elif parse_config.dataset == 'isic2016':
-    from dataset.isic2016 import myDataset
-    dataset = myDataset('test', aug=False)
-
-elif parse_config.dataset == 'isic2017':
-    from dataset.isic2017 import myDataset
-    dataset = myDataset('test', aug=False)
-
-
-
 ###########################################
 #--------------Load Test data-------------#
 ###########################################

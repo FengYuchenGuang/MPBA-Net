@@ -81,7 +81,6 @@ def train(epoch,
     model.train()
     iteration = 0
     for batch_idx, batch_data in enumerate(train_loader):
-        #         print(epoch, batch_idx)
         data = batch_data['image'].cuda().float()
         label = batch_data['label'].cuda().float()
         point = (batch_data['point'] > 0).cuda().float()
@@ -108,10 +107,8 @@ def train(epoch,
             output, point_maps_pre = model(data)
             output = torch.sigmoid(output)
 
-            #print("point_pre shape:{}, point shape:{}".format(point_pre.shape,point.shape))
             assert (output.shape == label.shape)
             loss_dc = dice_loss(output, label)
-            #print(point_maps_pre[-1].shape, point_c4.shape)
             assert (point_maps_pre[-1].shape == point_c4.shape)
 
             point_loss = 0.
@@ -164,8 +161,6 @@ def evaluation(epoch,
     model.eval()
     dice_value = 0
     iou_value = 0
-    dice_average = 0
-    iou_average = 0
     numm = 0
     for batch_idx, batch_data in enumerate(loader):
         data = batch_data['image'].cuda().float()
